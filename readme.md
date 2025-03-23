@@ -45,18 +45,6 @@ The Story Telling App is a web application that allows users to generate captiva
     - **Test Models of Varying Sizes**: Compare the outputs of models of different sizes to understand their influence on the story quality.
 5. **Update README**
 
-## Usage
-
-1. **Select Genre and Tone**: Choose the desired genre and tone for your story.
-2. **Manage Characters**: Add, edit, or delete characters to be included in the story.
-3. **Generate Story**: Click the "Generate Story" button to create a story based on your selections.
-4. **View Character Summary**: After the story is generated, view the summary of each character's role in the story.
-
-## Testing Different Models
-
-- **Evaluate Model Performance**: Test different models to see how well they remember user-created characters.
-- **Experiment with Context Window Sizes**: Observe the impact of different context window sizes on the story output.
-- **Test Models of Varying Sizes**: Compare the outputs of models of different sizes to understand their influence on the story quality.
 
 ## Contributors
 - 

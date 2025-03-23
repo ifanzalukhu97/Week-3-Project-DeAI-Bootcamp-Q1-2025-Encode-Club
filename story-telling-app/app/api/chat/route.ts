@@ -1,9 +1,10 @@
-import OpenAI from "openai";
-import {NextResponse} from "next/server";
+import { streamText } from "ai";
+import { createOpenAICompatible } from '@ai-sdk/openai-compatible';
 
-const openai = new OpenAI({
+const model = createOpenAICompatible({
     baseURL: "http://127.0.0.1:5000/v1",
-});
+    name: "local-model"
+})
 
 export const runtime = "edge";
 
@@ -12,8 +13,8 @@ export async function POST(req: Request) {
 
     console.log(messages);
 
-    const response = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
+    const response = streamText({
+        model: model("placeholder-model-llm-name"),
         messages: [
             {
                 role: "system",
@@ -23,11 +24,5 @@ export async function POST(req: Request) {
         ],
     });
 
-    const content = response.choices[0].message.content;
-
-    console.log(content);
-
-    return NextResponse.json({
-        content
-    })
+    return response.toDataStreamResponse();
 }

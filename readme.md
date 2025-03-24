@@ -71,12 +71,12 @@ The Story Telling App is a web application that allows users to generate captiva
 ![Image 3](screenshots/image-2.png)
 
 **Using Model llama-2-7b-chat.Q4_0.gguf**
-![Image 4](screenshots/image-4.png)
-![Image 5](screenshots/image-5.png)
+![Image 4](screenshots/image4.png)
+![Image 5](screenshots/image5.png)
 
 **Using Model TinyLlama_TinyLlama-1.1B-Chat-v1.0**
-![Image 4](screenshots/image-4.png)
-![Image 5](screenshots/image-5.png)
+![Image 4](screenshots/image4.png)
+![Image 5](screenshots/image5.png)
 
 ## Contributors for Form Submission
 

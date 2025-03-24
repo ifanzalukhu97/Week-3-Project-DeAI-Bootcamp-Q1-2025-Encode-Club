@@ -13,19 +13,23 @@ The Story Telling App is a web application that allows users to generate captiva
 - **Model Testing**: The app allows testing different AI models for story generation, comparing their outputs, and evaluating their performance.
 
 ## Setup Instructions
+
 1. **Prerequisites**
+
    - Node.js v20 or higher
    - LLM Loader / text-generation-webui already installed on your local machine
    - Run the text-generation-webui and don't forget to add the flag --api to enable the API (ref: [Text Generation WebUI API](https://github.com/Encode-Club-AI-Bootcamp/DeAI/blob/main/Lesson-11/exercises/04-Using-API.md))
    - Ensure the API is running at http://127.0.0.1:5000/docs
 
 2. **Clone the Repository**:
+
    ```bash
    git clone https://github.com/ifanzalukhu97/Week-3-Project-DeAI-Bootcamp-Q1-2025-Encode-Club
    cd story-telling-app
    ```
 
 3. **Install Dependencies**:
+
    ```bash
    npm install
    ```
@@ -36,26 +40,28 @@ The Story Telling App is a web application that allows users to generate captiva
    ```
 
 ## Todo
+
 1. **Setup Project**: done by Ifan ✔️
 2. **Create View**: done ✔️
-    - Allow users to add, edit, and delete characters
-    - Allow users to add character name, description, and personality
-    - Display the generated story result
+   - Allow users to add, edit, and delete characters
+   - Allow users to add character name, description, and personality
+   - Display the generated story result
 3. **Connect View to Prompt and Local LLM**: Provide a summary. Done ✔️
 4. **Test Different Models**:
-    - **Evaluate Model Performance**: Test different models to see how well they remember user-created characters.
-    - **Experiment with Context Window Sizes**: Observe the impact of different context window sizes on the story output.
-    - **Test Models of Varying Sizes**: Compare the outputs of models of different sizes to understand their influence on the story quality.
+   - **Evaluate Model Performance**: Test different models to see how well they remember user-created characters.
+   - **Experiment with Context Window Sizes**: Observe the impact of different context window sizes on the story output.
+   - **Test Models of Varying Sizes**: Compare the outputs of models of different sizes to understand their influence on the story quality.
 5. **Update README**
 
-
 ## Contributor Notes
+
 - Ensure there are no errors before committing the code. You can check for any errors by running `npm run build`.
 - Pull the latest changes before committing to avoid conflicts.
 - Ensure there are no conflicts before pushing the code to the repository.
 - Add the contributor name and Unique ID in the `README.md` file.
 
 ## Evaluation Reports
+
 **Using Model HuggingFaceTB_SmolLM2-1.7B-Instruct**
 ![Image 1](screenshots/image-1.png)
 ![Image 2](screenshots/image-2.png)
@@ -64,7 +70,16 @@ The Story Telling App is a web application that allows users to generate captiva
 ![Image 1](screenshots/image-1.png)
 ![Image 3](screenshots/image-2.png)
 
+**Using Model llama-2-7b-chat.Q4_0.gguf**
+![Image 4](screenshots/image-4.png)
+![Image 5](screenshots/image-5.png)
+
+**Using Model TinyLlama_TinyLlama-1.1B-Chat-v1.0**
+![Image 4](screenshots/image-4.png)
+![Image 5](screenshots/image-5.png)
+
 ## Contributors for Form Submission
+
 - [ifanzalukhu97](https://github.com/ifanzalukhu97) (Unique ID: S3lFve)
--  
+- [joyjsmun](https://github.com/joyjsmun) (Unique ID: OFVwFA)
 - ADD more later

@@ -37,16 +37,17 @@ The Story Telling App is a web application that allows users to generate captiva
 
 ## Todo
 1. **Setup Project**: done by Ifan ✔️
-2. **Create View**:
+2. **Create View**: done ✔️
     - Allow users to add, edit, and delete characters
     - Allow users to add character name, description, and personality
     - Display the generated story result
-3. **Connect View to Prompt and Local LLM**: Provide a summary
+3. **Connect View to Prompt and Local LLM**: Provide a summary. Done ✔️
 4. **Test Different Models**:
     - **Evaluate Model Performance**: Test different models to see how well they remember user-created characters.
     - **Experiment with Context Window Sizes**: Observe the impact of different context window sizes on the story output.
     - **Test Models of Varying Sizes**: Compare the outputs of models of different sizes to understand their influence on the story quality.
 5. **Update README**
+
 
 ## Contributor Notes
 - Ensure there are no errors before committing the code. You can check for any errors by running `npm run build`.
@@ -54,6 +55,14 @@ The Story Telling App is a web application that allows users to generate captiva
 - Ensure there are no conflicts before pushing the code to the repository.
 - Add the contributor name and Unique ID in the `README.md` file.
 
+## Evaluation Reports
+**Using Model HuggingFaceTB_SmolLM2-1.7B-Instruct**
+![Image 1](screenshots/image-1.png)
+![Image 2](screenshots/image-2.png)
+
+**Using Model meta-llama_Llama-3.2-1B-Instruct**
+![Image 1](screenshots/image-1.png)
+![Image 3](screenshots/image-2.png)
 
 ## Contributors for Form Submission
 - [ifanzalukhu97](https://github.com/ifanzalukhu97) (Unique ID: S3lFve)

@@ -7,9 +7,9 @@ The Story Telling App is a web application that allows users to generate captiva
 ## Features
 
 - **Genre and Tone Selection**: Users can customize the story by selecting from various genres and tones.
-- **Character Management**: Users can add, edit, and delete characters, each with a name, description, and personality.
+- **Index Management**: Users can add, edit, and delete characters, each with a name, description, and personality.
 - **Story Generation**: The app generates stories using user-selected genres, tones, and characters.
-- **Character Role Summary**: After generating a story, the app provides a summary of each character's role in the story.
+- **Index Role Summary**: After generating a story, the app provides a summary of each character's role in the story.
 - **Model Testing**: The app allows testing different AI models for story generation, comparing their outputs, and evaluating their performance.
 
 ## Setup Instructions

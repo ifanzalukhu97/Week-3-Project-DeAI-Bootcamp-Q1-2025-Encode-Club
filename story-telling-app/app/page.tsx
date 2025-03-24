@@ -1,30 +1,54 @@
 "use client";
 
-import {useState} from "react";
-import {useChat} from "ai/react";
+import { useState } from "react";
+import { useChat } from "ai/react";
+import { CharacterTable } from "@/components/character-table";
+import { Character } from '@/types'
 
 export default function Chat() {
-    const {messages, append, isLoading} = useChat();
+    const [characters, setCharacters] = useState<Character[]>([
+        {
+            id: 1,
+            name: "Charlie",
+            description: "A clumsy wedding planner who falls in love at every wedding",
+            personality: "Hopeless romantic with terrible luck and perfect comic timing"
+        },
+        {
+            id: 2,
+            name: "Sofia",
+            description: "A successful chef who can't cook when she's in love",
+            personality: "Confident and witty, but becomes hilariously awkward around her crush"
+        },
+        {
+            id: 3,
+            name: "James",
+            description: "A professional matchmaker who can't find his own soulmate",
+            personality: "Great at giving love advice, terrible at taking it, prone to slapstick situations"
+        }
+    ]);
+    const { messages, append, isLoading } = useChat();
+
     const genres = [
-        {emoji: "🧙", value: "Fantasy"},
-        {emoji: "🕵️", value: "Mystery"},
-        {emoji: "💑", value: "Romance"},
-        {emoji: "🚀", value: "Sci-Fi"},
+        { emoji: "🧙", value: "Fantasy" },
+        { emoji: "🕵️", value: "Mystery" },
+        { emoji: "💑", value: "Romance" },
+        { emoji: "🚀", value: "Sci-Fi" },
     ];
     const tones = [
-        {emoji: "😊", value: "Happy"},
-        {emoji: "😢", value: "Sad"},
-        {emoji: "😏", value: "Sarcastic"},
-        {emoji: "😂", value: "Funny"},
+        { emoji: "😊", value: "Happy" },
+        { emoji: "😢", value: "Sad" },
+        { emoji: "😏", value: "Sarcastic" },
+        { emoji: "😂", value: "Funny" },
     ];
 
     const [state, setState] = useState({
         genre: "",
         tone: "",
+        characters: [] as Character[],
     });
 
     const handleChange = ({
-                              target: {name, value},
+                              target: { name, value },
                           }: React.ChangeEvent<HTMLInputElement>) => {
         setState({
             ...state,
@@ -32,25 +56,72 @@ export default function Chat() {
         });
     };
 
+    const handleCharacterChange = (character: Character) => {
+        setState((prevState) => {
+            const isSelected = prevState.characters.some((char) => char.id === character.id);
+            const newCharacters = isSelected
+                ? prevState.characters.filter((char) => char.id !== character.id)
+                : [...prevState.characters, character];
+            return { ...prevState, characters: newCharacters };
+        });
+    };
+
+    const generatePrompt = () => {
+        const characterDescriptions = state.characters.map(
+            (char) => `${char.name} (${char.description}, ${char.personality})`
+        ).join(", ");
+        return `Generate a ${state.genre} story in a ${state.tone} tone featuring the characters: ${characterDescriptions}`;
+    };
+
     return (
-        <main className="mx-auto w-full p-24 flex flex-col">
-            <div className="p4 m-4">
-                <div className="flex flex-col items-center justify-center space-y-8 text-white">
-                    <div className="space-y-2">
-                        <h2 className="text-3xl font-bold">Story Telling App</h2>
-                        <p className="text-zinc-500 dark:text-zinc-400">
-                            Customize the story by selecting the genre and tone.
-                        </p>
+        <main className="mx-auto w-full max-w-7xl p-8">
+            <CharacterTable characters={characters} setCharacters={setCharacters} />
+
+            <div className="mt-8">
+                <div className="text-center mb-8">
+                    <h2 className="text-3xl font-bold text-white">Story Telling App</h2>
+                    <p className="text-zinc-400 mt-2">
+                        Customize the story by selecting the genre and tone.
+                    </p>
+                </div>
+
+                {/* Grid layout for the three main sections */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {/* Characters Section */}
+                    <div className="bg-gray-800/50 rounded-xl p-6">
+                        <h3 className="text-xl font-semibold text-white mb-4">Characters</h3>
+                        <div className="grid grid-cols-1 gap-3">
+                            {characters.map((character) => (
+                                <div
+                                    key={character.id}
+                                    className="bg-gray-700/50 rounded-lg p-3 flex items-center"
+                                >
+                                    <input
+                                        id={`character-${character.id}`}
+                                        type="checkbox"
+                                        value={character.name}
+                                        onChange={() => handleCharacterChange(character)}
+                                        className="h-4 w-4"
+                                    />
+                                    <label
+                                        className="ml-3 text-white"
+                                        htmlFor={`character-${character.id}`}
+                                    >
+                                        {character.name}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
-                    <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
-                        <h3 className="text-xl font-semibold">Genre</h3>
-
-                        <div className="flex flex-wrap justify-center">
-                            {genres.map(({value, emoji}) => (
+                    {/* Genre Section */}
+                    <div className="bg-gray-800/50 rounded-xl p-6">
+                        <h3 className="text-xl font-semibold text-white mb-4">Genre</h3>
+                        <div className="grid grid-cols-1 gap-3">
+                            {genres.map(({ value, emoji }) => (
                                 <div
                                     key={value}
-                                    className="p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg"
+                                    className="bg-gray-700/50 rounded-lg p-3 flex items-center"
                                 >
                                     <input
                                         id={value}
@@ -58,8 +129,9 @@ export default function Chat() {
                                         value={value}
                                         name="genre"
                                         onChange={handleChange}
+                                        className="h-4 w-4"
                                     />
-                                    <label className="ml-2" htmlFor={value}>
+                                    <label className="ml-3 text-white" htmlFor={value}>
                                         {`${emoji} ${value}`}
                                     </label>
                                 </div>
@@ -67,14 +139,14 @@ export default function Chat() {
                         </div>
                     </div>
 
-                    <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
-                        <h3 className="text-xl font-semibold">Tones</h3>
-
-                        <div className="flex flex-wrap justify-center">
-                            {tones.map(({value, emoji}) => (
+                    {/* Tones Section */}
+                    <div className="bg-gray-800/50 rounded-xl p-6">
+                        <h3 className="text-xl font-semibold text-white mb-4">Tones</h3>
+                        <div className="grid grid-cols-1 gap-3">
+                            {tones.map(({ value, emoji }) => (
                                 <div
                                     key={value}
-                                    className="p-4 m-2 bg-opacity-25 bg-gray-600 rounded-lg"
+                                    className="bg-gray-700/50 rounded-lg p-3 flex items-center"
                                 >
                                     <input
                                         id={value}
@@ -82,34 +154,32 @@ export default function Chat() {
                                         name="tone"
                                         value={value}
                                         onChange={handleChange}
+                                        className="h-4 w-4"
                                     />
-                                    <label className="ml-2" htmlFor={value}>
+                                    <label className="ml-3 text-white" htmlFor={value}>
                                         {`${emoji} ${value}`}
                                     </label>
                                 </div>
                             ))}
                         </div>
                     </div>
+                </div>
 
+                <div className="mt-8 text-center">
                     <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
-                        disabled={isLoading || !state.genre || !state.tone}
-                        onClick={() =>
-                            append({
-                                role: "user",
-                                content: `Generate a ${state.genre} story in a ${state.tone} tone`,
-                            })
-                        }
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg disabled:opacity-50 transition-colors"
+                        disabled={isLoading || !state.genre || !state.tone || state.characters.length === 0}
+                        onClick={() => append({
+                            role: "user",
+                            content: generatePrompt(),
+                        })}
                     >
                         Generate Story
                     </button>
 
                     <div
-                        hidden={
-                            messages.length === 0 ||
-                            messages[messages.length - 1]?.content.startsWith("Generate")
-                        }
-                        className="bg-opacity-25 bg-gray-700 rounded-lg p-4"
+                        hidden={messages.length === 0 || messages[messages.length - 1]?.content.startsWith("Generate")}
+                        className="mt-6 bg-gray-800/50 rounded-xl p-6 text-white"
                     >
                         {messages[messages.length - 1]?.content}
                     </div>
